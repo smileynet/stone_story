@@ -1,0 +1,108 @@
+?loc.begin
+  brew tar
+
+?key = backEnd 
+  ambient.Stop()
+  music.Stop()
+
+>`10,1,#rainE1,Current time = 
+^ @totaltime@ frames
+
+>`10,2,#rainE1,Best time =
+^ @loc.bestTime@ frames
+
+>`10,3,#rainE1,Average time =
+^ @loc.averageTime@ frames
+
+>`10,4,#rainE1,Gear score =
+^ @totalgp@
+
+>`10,6,Foe state = @foe.state@
+
+?hp < 10
+  activate potion
+
+equipL 8 hammer
+equipR 8 hammer
+
+?loc = rocky
+  equip shovel
+
+?foe.armor < 28 & foe ! ranged &
+^ foe.distance <11 
+  //equip bardiche
+
+?foe.hp > 80 & item.CanActivate()
+  activate R
+
+?foe = poison
+  equipL ice sword
+  ?foe = ranged
+    equipR 3* ice shield
+  ?foe.distance > 6 & foe ! ranged
+    equipR ice wand
+    
+?foe = vigor
+  equipL poison wand
+  equipR poison shield
+  ?foe.distance < 6
+    
+
+?foe = aether
+  equipL vital wand
+  equipR 5 vital shield
+
+?foe = fire
+  equipL aether wand
+  equipR aether shield
+  ?foe.distance < 6
+    equipL aether hammer
+
+?foe = ice
+  equipL fire wand
+  equipR fire shield
+  ?foe.distance < 6
+    equipL fire hammer
+
+?hp < 30 & foe ! boss 
+  equipR 5 vigor shield
+
+?loc = deadwood
+  ?harvest.distance < 10
+    //equip hatchet
+
+?foe = yeti | foe = nagaraja |
+^ foe = snatcher | foe = serpent |
+^ foe = immune_to_ranged | foe = xyloalgia |
+^ foe.armor > 5
+  ?foe.distance > 4
+    equipL 7 fire hammer
+    equipR 7 dashing shield
+  ?foe.distance < 6
+    equipL 7 fire hammer
+    equipR 8* hammer
+  ?foe = yeti & foe.distance > 2 &
+  ^ foe.distance < 6
+    equip shovel
+
+?foe = bronze guardian & foe.state ! 33
+  equip wand
+  equip aether wand
+
+?loc = mushroom & foe = ant
+  equipR dashing shield
+  ?foe.distance < 6
+    equipR poison hammer
+  equipL big sword
+
+?foe ! boss & foe.distance > 20
+  equipL triskelion
+
+?hp < maxhp & foe ! boss & foe.distance > 20
+  equipL ouroboros
+
+?pickup.distance < 10
+  equipL star
+
+?foe = boss & foe.armor = 0 & foe.hp < 60
+  equipR experience
