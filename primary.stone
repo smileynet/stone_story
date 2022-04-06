@@ -5,19 +5,16 @@
   ambient.Stop()
   music.Stop()
 
->`10,1,#rainE1,Current time = 
-^ @totaltime@ frames
-
->`10,2,#rainE1,Best time =
-^ @loc.bestTime@ frames
-
->`10,3,#rainE1,Average time =
-^ @loc.averageTime@ frames
-
->`10,4,#rainE1,Gear score =
-^ @totalgp@
-
->`10,6,Foe state = @foe.state@
+?ai.enabled
+  >`10,1,#rainE1,Current time = 
+  ^ @totaltime@ frames
+  >`10,2,#rainE1,Best time =
+  ^ @loc.bestTime@ frames
+  >`10,3,#rainE1,Average time =
+  ^ @loc.averageTime@ frames
+  >`10,4,#rainE1,Gear score =
+  ^ @totalgp@
+  >`10,6,Foe state = @foe.state@
 
 ?hp < 10
   activate potion
@@ -46,11 +43,12 @@ equipR 8 hammer
   equipL poison wand
   equipR poison shield
   ?foe.distance < 6
-    
 
 ?foe = aether
   equipL vital wand
-  equipR 5 vital shield
+  equipR 8* wand
+  ?foe = ranged
+    equipR 7 vital shield
 
 ?foe = fire
   equipL aether wand
