@@ -7,37 +7,8 @@
 //>`18,1,#rainE1,Gear score =
 //^ @totalgp@
 
-var element = fire
-
-?foe = poison
-  element = ice
-:?foe = vigor
-  element = poison
-:?foe = ice
-  element = fire
-
-equipL @element@ wand
-equipR vigor wand
-
-?foe = immune_to_ranged
-  equipL @element@ sword
-  equipR vigor sword
-
-?foe = ice pillar
-  equipL 8 fire sword
-  equipR fire shield
-
-?loc.stars <= 5
-  equipR ki stone
-  ?foe.distance > 10
-    equipR dashing shield
-
-?foe.armor > 0
-  equipL @element@ hammer
-  equipR vigor hammer
-
-?foe = ranged | loc = mine
-  equipR @element@ shield
+equipL vigor wand
+equipR vigor shield
   
 ?foe = boss | 
 ^foe = boss_fat | foe = boss_skinny
@@ -52,23 +23,15 @@ equipR vigor wand
       equipR cultist mask
       activate R
   :
-    equipL @element@ sword
-    equipR vigor sword
+    equipL vigor sword
     ?foe.distance > 6
       equipR dashing shield
     ?foe.armor > 50
-      equipL @element@ hammer
-      equipR vigor hammer
-    ?foe.state = 3 & foe ! nagaraja
-      equipR @element@ shield
-    ?foe.armor = 0 & foe.hp < 60
-      equipR experience
-    
-?foe = ice wall
-  equipR @element@ shield
+      equipL vigor hammer
+
   
 ?foe ! boss & foe.distance > 20
-  equipR triskelion
+  equipL triskelion
   ?hp < maxhp
     equipL ouroboros
 
